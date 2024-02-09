@@ -32,5 +32,10 @@ pipeline {
 		}
             }
         }
+	stage('Deploy to Tomcat') {
+            steps {
+                sh "sudo scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/naidu/webapp/target/webapp.war root@54.174.137.67:/home/ec2-user/tomcat/webapps/"
+            }
+        }
     }
 }
