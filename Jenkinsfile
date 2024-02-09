@@ -1,5 +1,7 @@
 pipeline {
     agent any
+    environment {
+    	SONARQUBE_HOME = tool "sonarscanner"
 
     stages {
         stage('clone from github(GitHubBuild)') {
@@ -20,6 +22,13 @@ pipeline {
         stage('Build war file(Maven Build)') {
             steps {
                 sh "mvn clean install package"
+            }
+        }
+	stage('SonarQube Analysis') {
+            steps {
+	    	withSonarQubeEnv('sonarqube') {
+                	sh "${SONARQUBE_HOME}/bin/sonar-scanner -Dsonar.projectKey=NaiduPro -Dsonar.projectName=NaiduPro -Dsonar.java.binaries=."
+		}
             }
         }
     }
