@@ -2,6 +2,7 @@ pipeline {
     agent any
     environment {
     	SONARQUBE_HOME = tool "sonarscanner"
+	}
 
     stages {
         stage('clone from github(GitHubBuild)') {
