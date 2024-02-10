@@ -37,5 +37,23 @@ pipeline {
                 sh "sudo scp -o StrictHostKeyChecking=no /var/lib/jenkins/workspace/naidu/webapp/target/webapp.war root@54.174.137.67:/home/ec2-user/tomcat/webapps/"
             }
         }
+	stage('Docker Image Build&Tag') {
+    		steps {
+        		script {
+            			withDockerRegistry(credentialsId: 'dockertoken', toolName: 'docker') {
+                			sh "docker build -t adikesavanaidug2404/naiduproject:latest -f Dockerfile ."
+            			}
+        		}
+    		}
+	}
+	stage('Docker Image Push') {
+    		steps {
+        		script {
+            			withDockerRegistry(credentialsId: 'dockertoken', toolName: 'docker') {
+                			sh "docker push adikesavanaidug2404/naiduproject:latest"
+            			}
+        		}
+    		}
+	}
     }
 }
