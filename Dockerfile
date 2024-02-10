@@ -1,7 +1,6 @@
 # Pull base image 
-From tomcat:8-jre8
+From tomcat:latest
 
 # Maintainer 
 MAINTAINER "adikesavanaidug2404@gmail.com" 
-COPY ./webapp.war /usr/local/tomcat/webapps
-
+COPY ./webapp.war /var/lib/jenkins/workspace/naidu/webapp/target
