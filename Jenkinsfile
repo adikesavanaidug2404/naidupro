@@ -38,8 +38,8 @@ pipeline {
             }
         }
 	stage('Docker Image Build&Tag') {
-    		steps {
-        		script {
+		steps {
+			script {
             			withDockerRegistry(credentialsId: 'dockertoken', toolName: 'docker') {
                 			sh "docker build -t adikesavanaidug2404/naiduproject:latest -f Dockerfile ."
             			}
